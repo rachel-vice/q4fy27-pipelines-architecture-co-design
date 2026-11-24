@@ -9,7 +9,7 @@ var CODE_PATTERN = /^[A-HJKMNP-Z2-9]{6}$/; // must match CODE_ALPHABET in app.js
 
 // Keep in sync with FIELDS in app.js. One column per piece holds its final group.
 var FIELD_IDS = [
-  'run-status', 'workflow', 'job', 'pipeline-name', 'pipeline-id', 'project', 'repo-name',
+  'run-status', 'workflow', 'job', 'parallel-executions', 'pipeline-name', 'pipeline-id', 'project', 'project-settings', 'repo-name',
   'commit-sha', 'commit-message', 'branch', 'tag', 'trigger', 'pushed-by', 'start-time',
   'finish-time', 'approval', 'rerun', 'cancel', 'fix-workflow', 'test-failures'
 ];
@@ -35,20 +35,24 @@ function doPost(e) {
     var groupById = {};
     pieces.forEach(function (p) { groupById[p.id] = p.group + ' #' + p.position + ' (' + p.moves + ' moves)'; });
 
-    var row = [
-      data.code,
-      new Date(),
-      data.startedAt || '',
-      data.endedAt || '',
-      data.totalSeconds || '',
-      data.deviceType || '',
-      data.viewport || '',
-      data.resets || 0,
-      (data.trayOrder || []).join(',')
-    ];
-    FIELD_IDS.forEach(function (id) { row.push(groupById[id] || ''); });
-    row.push(JSON.stringify(pieces));
-    row.push(JSON.stringify(data.log || []));
+    var valuesByHeader = {
+      code: data.code,
+      receivedAt: new Date(),
+      startedAt: data.startedAt || '',
+      endedAt: data.endedAt || '',
+      totalSeconds: data.totalSeconds || '',
+      deviceType: data.deviceType || '',
+      viewport: data.viewport || '',
+      resets: data.resets || 0,
+      trayOrder: (data.trayOrder || []).join(','),
+      piecesJson: JSON.stringify(pieces),
+      eventLogJson: JSON.stringify(data.log || [])
+    };
+    FIELD_IDS.forEach(function (id) { valuesByHeader[id] = groupById[id] || ''; });
+    var headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
+    var row = headers.map(function (header) {
+      return Object.prototype.hasOwnProperty.call(valuesByHeader, header) ? valuesByHeader[header] : '';
+    });
 
     var existing = findRow_(sheet, data.code);
     if (existing > 0) {
@@ -71,9 +75,19 @@ function doGet() {
 function getSheet_() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sheet = ss.getSheetByName(SHEET_NAME) || ss.insertSheet(SHEET_NAME);
-  if (sheet.getLastRow() === 0) {
-    sheet.appendRow(BASE_HEADERS.concat(FIELD_IDS, TAIL_HEADERS));
+  var expectedHeaders = BASE_HEADERS.concat(FIELD_IDS, TAIL_HEADERS);
+  if (sheet.getLastRow() === 0 || sheet.getLastColumn() === 0) {
+    sheet.appendRow(expectedHeaders);
     sheet.setFrozenRows(1);
+    return sheet;
+  }
+  var currentHeaders = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
+  var missingHeaders = expectedHeaders.filter(function (header) { return currentHeaders.indexOf(header) < 0; });
+  if (missingHeaders.length) {
+    var lastColumn = sheet.getLastColumn();
+    var extraColumns = lastColumn + missingHeaders.length - sheet.getMaxColumns();
+    if (extraColumns > 0) sheet.insertColumnsAfter(sheet.getMaxColumns(), extraColumns);
+    sheet.getRange(1, lastColumn + 1, 1, missingHeaders.length).setValues([missingHeaders]);
   }
   return sheet;
 }
