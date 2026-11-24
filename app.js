@@ -7,7 +7,7 @@
   // ---------------------------------------------------------------- config
   var CONFIG = {
     // Paste your deployed Google Apps Script web app URL here (see README).
-    ENDPOINT: '',
+    ENDPOINT: 'https://script.google.com/macros/s/AKfycbwGn89W7o5C2OwlXa4Uy_v1y9-iEdXJm7UyTT9ePAU36FOyWOUpu_uXcSc_jmCJITkV/exec',
     TIMEOUT_MS: 8000,
     RETRIES: 1
   };
