@@ -45,7 +45,7 @@
   FIELDS.forEach(function (f) { BY_ID[f.id] = f; });
 
   var GROUPS = [
-    { key: 'primary', title: 'Key information I use to identify a CI pipeline (select up to 3 items)', limit: PRIMARY_LIMIT },
+    { key: 'primary', title: 'Key information I scan for to find a specific CI pipeline (select up to 3 items)', limit: PRIMARY_LIMIT },
     { key: 'secondary', title: 'Other information I want available alongside my CI pipeline', limit: 0 },
     { key: 'click', title: "Information I'm fine looking up when I need it (i.e., behind a click or hover)", limit: 0 },
     { key: 'none', title: "Information I don't need when I'm checking on a CI pipeline.", limit: 0 }
