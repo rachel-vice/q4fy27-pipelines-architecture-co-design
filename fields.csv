@@ -1,23 +1,23 @@
 name,ex,def
-"Pipeline run status and duration","Failed · 33s","Whether this run passed, failed, is running or is waiting, and how long it took"
-"Workflow (name, status, duration)","tag-release · Failed · 33s","A workflow groups the jobs in a run and sets the order they run in. Shows whether it passed, failed or is running, and how long it took"
-"Job (name, status, duration)","build · Failed · 31s","A job is a set of steps that run together. Shows whether it passed, failed or is running, and how long it took"
-"Parallel executions","4 parallel executions","The number of instances a job runs at the same time"
-"Pipeline name","build-and-test","The name of the pipeline, which defines where your configuration is stored and where your code is checked out from"
-"Pipeline ID","7zuo5bQ3kz9e…","A unique identifier for the pipeline"
-"Project","acme-frontend-web","The project that runs this code."
-"Project settings","Environment variables · integrations","Settings and configuration that apply to the project, such as project-level environment variables and integrations"
-"Repo name","acme-frontend-web","The code repository the project's code comes from"
-"Commit SHA","ec83f73","Short ID of the commit the run used"
-"Commit message","""Fix retry on timeout""","The message written for the commit"
-"Branch","main","The branch the run was triggered on"
-"Tag","v1.0.0","The git tag that started the run"
-"Trigger","Tag pushed","What happened to start the run, such as a tag push"
-"Pushed by","Jane Doe","The person whose action started the run"
-"Start time","Apr 07 22:05:56 UTC","When the run began"
-"Finish time","Apr 07 22:06:30 UTC","When the run finished"
-"Approval button","Approve","A manual gate. A job that pauses the workflow until someone with permission approves it. Shows the approve and cancel buttons with the job's name"
-"Rerun button","Rerun icon","Run a failed workflow again without starting a new pipeline run"
-"Cancel button","Cancel icon","Button to cancel a workflow"
-"Fix workflow action","Fix icon","An icon that lets you copy a prompt describing the failure to paste into an AI tool of your choice, or fix it with AI directly"
-"Test failure details","checkout.test.js · 2 tests failed","A summary of which tests failed and where"
+Pipeline run status and duration,Failed · 33s,"Shows a pipeline run, its status (e.g., passed, failed, awaiting approval) and how long it took"
+"Workflow (name, status, duration)",tag-release · Failed · 33s,"A workflow groups the jobs in a run and the order they run in. Shows whether its status (e.g., passed, failed, awaiting approval) and how long it took"
+"Job (name, status, duration)",build · Failed · 31s,"A job is a set of steps that run together. Shows whether its status (e.g., passed, failed, awaiting approval) and how long it took"
+Parallel executions,4 parallel executions,The number of instances a job runs at the same time
+Pipeline name,build-and-test,"The name of the pipeline, which defines where your configuration is stored and where your code is checked out from"
+Pipeline ID,7zuo5bQ3kz9e…,A unique identifier for the pipeline
+Project,acme-frontend-web,The project that runs this code
+Project settings link,an icon or menu to access settings,"A link to get to settings and configuration that apply to the project, such as project-level environment variables and integrations"
+Repo,acme-frontend-web,The code repository the project's code comes from
+Commit SHA,ec83f73,Short ID of the commit the run used
+Commit message,"""Fix retry on timeout""",The message written for the commit
+Branch,main,The branch the run was triggered on
+Tag,v1.0.0,The git tag that started the run
+Trigger,Tag pushed,"What happened to start the run, such as a tag push"
+Pushed by,Jane Doe,The person whose action started the run
+Start time,Apr 07 22:05:56 UTC,When the run began
+Finish time,Apr 07 22:06:30 UTC,When the run finished
+Approval button,Approve,A manual gate for a job that pauses the workflow until someone with permission approves it
+Rerun button,Rerun icon,Button to run a failed workflow again without starting a new pipeline run
+Cancel button,Cancel icon,Button to cancel a workflow
+Fix workflow action,Fix icon,"A button that lets you copy a prompt describing the failure to paste into an AI tool of your choice, or fix it with AI directly"
+Test failure details,checkout.test.js · 2 tests failed,A summary of which tests failed and where
