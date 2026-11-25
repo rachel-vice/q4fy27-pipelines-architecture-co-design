@@ -316,9 +316,8 @@
   }
 
   // ---------------------------------------------------------------- screens
-  function startScreen() {
-    return h('main', { class: 'start' },
-      h('h1', null, 'Sort the information you use to check on a CI pipeline'),
+  function instructionContent() {
+    return [
       h('p', null, "In this exercise, you'll sort pieces of information about CI/CD Pipelines based on your needs."),
       h('p', null, 'Think about situations like these:'),
       h('ul', null,
@@ -331,7 +330,14 @@
         h('li', null, 'Every piece of information needs to go somewhere.'),
         h('li', null, 'Your first group holds the information you need to identify a CI pipeline run. You can put up to 3 pieces of information here but do not need to fill all 3 spots.'),
         h('li', null, 'If you need different pieces in different situations, put each one where you’d reach for it most often, and tell us about the exception.'),
-        h('li', null, h('strong', null, "Talk through your decisions as you organize the information. What information are you placing where, and why? What do you use this information for?"))),
+        h('li', null, h('strong', null, "Talk through your decisions as you organize the information. What information are you placing where, and why? What do you use this information for?")))
+    ];
+  }
+
+  function startScreen() {
+    return h('main', { class: 'start' },
+      h('h1', null, 'Sort the information you use to check on a CI pipeline'),
+      instructionContent(),
       h('div', null, h('button', { class: 'btn-primary', type: 'button', onclick: function () {
         state.screen = 'sort'; state.startedAt = Date.now(); logEvent({ type: 'start' }); render();
       } }, 'Start')));
@@ -341,6 +347,12 @@
     var left = state.lists.tray.length;
     var selLoc = state.selected ? where(state.selected) : null;
     var complete = state.saveStatus !== 'idle';
+    var reviewDialog;
+    reviewDialog = h('dialog', { class: 'instructions-dialog', 'aria-labelledby': 'instructions-dialog-title' },
+      h('div', { class: 'instructions-dialog-head' },
+        h('h2', { id: 'instructions-dialog-title' }, 'Instructions'),
+        h('button', { class: 'btn-secondary', type: 'button', onclick: function () { reviewDialog.close(); } }, 'Close')),
+      h('div', { class: 'instructions-copy' }, instructionContent()));
 
     var tray = h('section', { class: 'panel tray', 'aria-label': 'Pieces to sort, ' + left + ' left' },
       h('div', { class: 'panel-head' },
@@ -375,13 +387,18 @@
     });
 
     return h('main', { class: 'sort' },
+      reviewDialog,
       h('header', { class: 'sort-header' },
         h('div', { class: 'intro' },
           h('h1', null, 'Sort the information you use to check on a CI pipeline'),
           h('p', null, "Drag it to a group, or select it and choose Add to this group. Talk aloud as you go about what you're doing and why.")),
         h('div', { class: 'header-actions' },
-          h('button', { class: 'btn-secondary', type: 'button', onclick: resetAll }, 'Reset'),
-          h('button', { class: 'btn-continue', type: 'button', disabled: left > 0 || complete, onclick: proceed }, complete ? 'Complete' : left > 0 ? left + ' left' : 'Continue'))),
+          h('button', { class: 'btn-secondary', type: 'button', onclick: function () { reviewDialog.showModal(); } }, 'Review instructions'),
+          h('button', { class: 'btn-secondary', type: 'button', disabled: complete, onclick: resetAll }, 'Reset'),
+          h('button', { class: 'btn-continue', type: 'button', disabled: left > 0 || complete, onclick: proceed }, left > 0 && !complete ? left + ' left' : 'Done sorting'))),
+      complete ? h('div', { class: 'session-id', role: 'status' },
+        h('span', { class: 'session-id-label' }, 'Session ID'),
+        h('strong', { class: 'session-id-code' }, state.code)) : null,
       h('div', { class: 'layout' }, tray, h('div', { class: 'groups' }, groups)),
       state.selected ? h('div', { class: 'select-bar', role: 'status' },
         h('span', null, 'Selected: ', h('strong', null, BY_ID[state.selected].name), '. Choose a group to add it to. Escape cancels.'),
