@@ -46,12 +46,13 @@ h1, h2, p { margin: 0; }
 }
 
 /* ---------- Sort ---------- */
-.sort { max-width: 1296px; margin: 0 auto; padding: 32px 32px 96px; display: flex; flex-direction: column; gap: 20px; }
+.sort { max-width: 1296px; margin: 0 auto; padding: 32px 32px 96px; display: flex; flex-direction: column; gap: 28px; }
 .sort-header { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; }
-.sort-header .intro { flex: 1 1 420px; min-width: 0; }
+.sort-header .intro { flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 10px; }
 .sort-header h1 { font-size: 26px; line-height: 1.2; font-weight: 700; letter-spacing: -0.01em; }
-.sort-header p { margin-top: 4px; font-size: 15px; color: var(--muted); }
+.sort-header p { font-size: 15px; color: var(--muted); }
 .header-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+.header-actions .btn-secondary, .header-actions .btn-continue { min-height: 42px; padding: 0 16px; font-size: 14px; }
 .instructions-dialog {
   width: min(720px, calc(100vw - 32px)); max-height: calc(100vh - 32px); padding: 24px;
   color: var(--ink); background: var(--ground); border: 1.5px solid var(--line-strong); border-radius: 14px;
@@ -84,11 +85,11 @@ h1, h2, p { margin: 0; }
   background: var(--warn-tint); border: 1.5px solid var(--warn); border-radius: 10px;
 }
 
-.layout { display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start; }
+.layout { display: flex; flex-wrap: wrap; gap: 28px; align-items: flex-start; }
 .tray { flex: 1 1 400px; max-width: 440px; }
-.groups { flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 16px; }
+.groups { flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 22px; }
 
-.panel { background: #fff; border: 1.5px solid var(--line); border-radius: 14px; padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+.panel { background: #fff; border: 1.5px solid var(--line); border-radius: 14px; padding: 16px; display: flex; flex-direction: column; gap: 16px; }
 .panel.primary { border: 2.5px solid var(--accent); }
 .panel.full { border: 2.5px solid var(--warn); }
 .panel.over { border: 3px dashed var(--accent); background: var(--accent-drop); }
