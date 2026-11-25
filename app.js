@@ -325,14 +325,13 @@
         h('li', null, h('strong', null, 'Troubleshooting: '), 'A build failed, and you need to find out what went wrong.'),
         h('li', null, h('strong', null, 'Approving: '), 'A pipeline is waiting for someone to approve it before it continues.'),
         h('li', null, h('strong', null, 'Checking what released: '), 'You want to confirm what shipped and when.')),
-      h('h2', null, 'Talk through your decisions as you organize the information. What information are you placing where, and why? What do you use this information for?'),
       h('ol', null,
-        h('li', null, 'If you don’t know what a piece of information is, hover over or tap the ⓘ to read what it means and see an example.'),
+        h('li', null, 'There is a bank of available pieces of information. Hover over or tap the ⓘ to read what it means and see an example.'),
         h('li', null, 'Place each piece into the group that fits how you use it.'),
-        h('li', null, 'Your first group holds the information you need to identify a CI pipeline run. You can put up to 3 pieces of information here but do not need to fill all 3 spots.'),
         h('li', null, 'Every piece of information needs to go somewhere.'),
+        h('li', null, 'Your first group holds the information you need to identify a CI pipeline run. You can put up to 3 pieces of information here but do not need to fill all 3 spots.'),
         h('li', null, 'If you need different pieces in different situations, put each one where you’d reach for it most often, and tell us about the exception.'),
-        h('li', null, h('strong', null, "Please talk aloud about what you're choosing and why as you go."))),
+        h('li', null, h('strong', null, "Talk through your decisions as you organize the information. What information are you placing where, and why? What do you use this information for?"))),
       h('div', null, h('button', { class: 'btn-primary', type: 'button', onclick: function () {
         state.screen = 'sort'; state.startedAt = Date.now(); logEvent({ type: 'start' }); render();
       } }, 'Start')));
