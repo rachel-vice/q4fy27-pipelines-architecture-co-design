@@ -18,15 +18,15 @@
   // ---------------------------------------------------------------- data
   // Keep these strings in sync with apps-script/Code.gs (FIELD_IDS).
   var FIELDS = [
-    { id: 'run-status', name: 'Pipeline run status and duration', ex: 'Failed · 33s', def: 'Whether this run passed, failed, is running or is waiting, and how long it took' },
-    { id: 'workflow', name: 'Workflow (name, status, duration)', ex: 'tag-release · Failed · 33s', def: 'A workflow groups the jobs in a run and sets the order they run in. Shows whether it passed, failed or is running, and how long it took' },
-    { id: 'job', name: 'Job (name, status, duration)', ex: 'build · Failed · 31s', def: 'A job is a set of steps that run together. Shows whether it passed, failed or is running, and how long it took' },
+    { id: 'run-status', name: 'Pipeline run status and duration', ex: 'Failed · 33s', def: 'Shows a pipeline run, its status (e.g., passed, failed, awaiting approval) and how long it took' },
+    { id: 'workflow', name: 'Workflow (name, status, duration)', ex: 'tag-release · Failed · 33s', def: 'A workflow groups the jobs in a run and the order they run in. Shows whether its status (e.g., passed, failed, awaiting approval) and how long it took' },
+    { id: 'job', name: 'Job (name, status, duration)', ex: 'build · Failed · 31s', def: 'A job is a set of steps that run together. Shows whether its status (e.g., passed, failed, awaiting approval) and how long it took' },
     { id: 'parallel-executions', name: 'Parallel executions', ex: '4 parallel executions', def: 'The number of instances a job runs at the same time' },
     { id: 'pipeline-name', name: 'Pipeline name', ex: 'build-and-test', def: 'The name of the pipeline, which defines where your configuration is stored and where your code is checked out from' },
     { id: 'pipeline-id', name: 'Pipeline ID', ex: '7zuo5bQ3kz9e…', def: 'A unique identifier for the pipeline' },
-    { id: 'project', name: 'Project', ex: 'acme-frontend-web', def: "The project that runs this code." },
-    { id: 'project-settings', name: 'Project settings', ex: 'Environment variables · integrations', def: 'Settings and configuration that apply to the project, such as project-level environment variables and integrations' },
-    { id: 'repo-name', name: 'Repo name', ex: 'acme-frontend-web', def: "The code repository the project's code comes from" },
+    { id: 'project', name: 'Project', ex: 'acme-frontend-web', def: 'The project that runs this code' },
+    { id: 'project-settings', name: 'Project settings link', ex: 'an icon or menu to access settings', def: 'A link to get to settings and configuration that apply to the project, such as project-level environment variables and integrations' },
+    { id: 'repo-name', name: 'Repo', ex: 'acme-frontend-web', def: "The code repository the project's code comes from" },
     { id: 'commit-sha', name: 'Commit SHA', ex: 'ec83f73', def: 'Short ID of the commit the run used' },
     { id: 'commit-message', name: 'Commit message', ex: '"Fix retry on timeout"', def: 'The message written for the commit' },
     { id: 'branch', name: 'Branch', ex: 'main', def: 'The branch the run was triggered on' },
@@ -35,10 +35,10 @@
     { id: 'pushed-by', name: 'Pushed by', ex: 'Jane Doe', def: 'The person whose action started the run' },
     { id: 'start-time', name: 'Start time', ex: 'Apr 07 22:05:56 UTC', def: 'When the run began' },
     { id: 'finish-time', name: 'Finish time', ex: 'Apr 07 22:06:30 UTC', def: 'When the run finished' },
-    { id: 'approval', name: 'Approval button', ex: 'Approve', def: "A manual gate. A job that pauses the workflow until someone with permission approves it. Shows the approve and cancel buttons with the job's name" },
-    { id: 'rerun', name: 'Rerun button', ex: 'Rerun icon', def: 'Run a failed workflow again without starting a new pipeline run' },
+    { id: 'approval', name: 'Approval button', ex: 'Approve', def: 'A manual gate for a job that pauses the workflow until someone with permission approves it' },
+    { id: 'rerun', name: 'Rerun button', ex: 'Rerun icon', def: 'Button to run a failed workflow again without starting a new pipeline run' },
     { id: 'cancel', name: 'Cancel button', ex: 'Cancel icon', def: 'Button to cancel a workflow' },
-    { id: 'fix-workflow', name: 'Fix workflow action', ex: 'Fix icon', def: 'An icon that lets you copy a prompt describing the failure to paste into an AI tool of your choice, or fix it with AI directly' },
+    { id: 'fix-workflow', name: 'Fix workflow action', ex: 'Fix icon', def: 'A button that lets you copy a prompt describing the failure to paste into an AI tool of your choice, or fix it with AI directly' },
     { id: 'test-failures', name: 'Test failure details', ex: 'checkout.test.js · 2 tests failed', def: 'A summary of which tests failed and where' }
   ];
   var BY_ID = {};
